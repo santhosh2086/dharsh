@@ -1,0 +1,13 @@
+{
+  "name": "dharsh-shop",
+  "version": "1.0.0",
+  "description": "DHARSH — static e-commerce storefront (HTML/CSS/JS)",
+  "private": true,
+  "scripts": {
+    "start": "serve -l 3000 .",
+    "dev": "serve -l 3000 ."
+  },
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DHARSH</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+      <div class="logo">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="pink" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
+  <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
+</svg>
+<h3>DHARSH</h3>
+      </div>
+<input type="search" id="searchbar" placeholder="Search for kurtas, earbuds, sneakers…" height="20">
+<button type="submit" id="search" onclick="doSearch()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      </button>
+      <div class="options">
+        <button onclick="showlogin()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+</svg></a>login</button>
+<button id="cart" onclick="cart()">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16l-1.5 10h-13L4 6Z"/><path d="M8 6V5a4 4 0 0 1 8 0v1"/></svg>
+   Cart<span class="cart-count" id="cartCount" style="display:none;">0</span>
+</button>
+</div>
+    </nav>
+    <div class="overlay-bg" id="overlayBg" onclick="cancel()"></div>
+<div class="login" id="loginBox">
+        <button class="cancel" onclick="cancel()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/>
+</svg></button>
+        <h2>welcome</h2>
+        <svg id="per" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+</svg>
+        <label>Email:</label><input type="email" id="loginEmail" placeholder="Enter your Email id">
+        <label>Password:</label><input type="password" id="loginPassword" placeholder="Enter your password">
+         <label>Confirm Password:</label><input type="password" id="loginConfirmPassword" placeholder="Enter your password">
+        <button  id="login" onclick="login2()">login</button>
+    </div>
+    <div class="category">
+      <div class="overlay-bg" id="cartOverlayBg" onclick="closeCart()"></div>
+<div class="cart-panel" id="cartPanel">
+    <div class="cart-header">
+        <h2>Your Cart</h2>
+        <button class="cancel" onclick="closeCart()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#141135" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/>
+            </svg>
+        </button>
+    </div>
+    <div id="cartItems"></div>
+    <div class="cart-footer">
+        <div class="cart-total-row">
+            <span>Total</span>
+            <strong id="cartTotal">₹0</strong>
+        </div>
+        <button class="checkout-btn" onclick="checkout()">Checkout</button>
+    </div>
+</div>
+     <button onclick="All()"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+</svg>All</button>
+<button onclick="ele()">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tv" viewBox="0 0 16 16">
+  <path d="M2.5 13.5A.5.5 0 0 1 3 13h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5M13.991 3l.024.001a1.5 1.5 0 0 1 .538.143.76.76 0 0 1 .302.254c.067.1.145.277.145.602v5.991l-.001.024a1.5 1.5 0 0 1-.143.538.76.76 0 0 1-.254.302c-.1.067-.277.145-.602.145H2.009l-.024-.001a1.5 1.5 0 0 1-.538-.143.76.76 0 0 1-.302-.254C1.078 10.502 1 10.325 1 10V4.009l.001-.024a1.5 1.5 0 0 1 .143-.538.76.76 0 0 1 .254-.302C1.498 3.078 1.675 3 2 3zM14 2H2C0 2 0 4 0 4v6c0 2 2 2 2 2h12c2 0 2-2 2-2V4c0-2-2-2-2-2"/>
+</svg>Electronics</button>
+<button onclick="fash()">
+  <svg viewBox="0 0 24 24" fill="none" stroke="#1f1b4c" stroke-width="1.6"><path d="M9 4l3 2 3-2 4 3-2 3-2-1v11H8V9L6 10 4 7Z"/></svg>
+  Fashion</button>
+<button onclick="beauty()"><svg viewBox="0 0 24 24" fill="none" stroke="#1f1b4c" stroke-width="1.6"><rect x="8" y="8" width="8" height="12" rx="1.5"/><path d="M10 8V5a2 2 0 0 1 4 0v3"/></svg> 
+  Beauty</button>
+<button onclick="home()"><svg viewBox="0 0 24 24" fill="none" stroke="#1f1b4c" stroke-width="1.6"><path d="M4 11 12 4l8 7"/><path d="M6 10v9h12v-9"/></svg> 
+  Home</button>
+<button onclick="kitch()"><svg viewBox="0 0 24 24" fill="none" stroke="#1f1b4c" stroke-width="1.6"><path d="M6 3v7a3 3 0 0 0 6 0V3M9 10v11"/><path d="M17 3v18M14 8h6"/></svg>
+  Kitchen</button>
+    </div>
+  <section class="offer">
+  <div class="offer-inner">
+    <div>
+      <span class="offer-sale">Flash sale · live now</span>
+      <h1>Up to 70% off, coming soon.</h1>
+      <p>Fashion, electronics, and home essentials at prices that reset every few hours. Cash on delivery on everything.</p>
+      <div class="timer-box" id="timerBox" >
+        <div class="timer-unit"><strong id="tHrs">23</strong><span>hrs</span></div>
+        <div class="timer-unit"><strong id="tMin">59</strong><span>min</span></div>
+        <div class="timer-unit"><strong id="tSec">59</strong><span>sec</span></div>
+      </div>
+    </div>
+    <div class="hero-badge" ><strong>70%</strong><span>OFF TOMMAROW</span></div>
+  </div>
+</section>
+<section>
+<h2 class="sort">SORT BY CATEGORY</h2>
+<div class="page">
+<div class="sortcategory"> <button onclick="All()"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+</svg>All</button></div>
+<div class="sortcategory"><button onclick="ele()">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tv" viewBox="0 0 16 16">
+  <path d="M2.5 13.5A.5.5 0 0 1 3 13h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5M13.991 3l.024.001a1.5 1.5 0 0 1 .538.143.76.76 0 0 1 .302.254c.067.1.145.277.145.602v5.991l-.001.024a1.5 1.5 0 0 1-.143.538.76.76 0 0 1-.254.302c-.1.067-.277.145-.602.145H2.009l-.024-.001a1.5 1.5 0 0 1-.538-.143.76.76 0 0 1-.302-.254C1.078 10.502 1 10.325 1 10V4.009l.001-.024a1.5 1.5 0 0 1 .143-.538.76.76 0 0 1 .254-.302C1.498 3.078 1.675 3 2 3zM14 2H2C0 2 0 4 0 4v6c0 2 2 2 2 2h12c2 0 2-2 2-2V4c0-2-2-2-2-2"/>
+</svg>Electronics</button></div>
+<div class="sortcategory"><button onclick="fash()">
+  <svg viewBox="0 0 24 24" fill="none" stroke="#1f1b4c" stroke-width="1.6"><path d="M9 4l3 2 3-2 4 3-2 3-2-1v11H8V9L6 10 4 7Z"/></svg>
+  Fashion</button></div>
+<div class="sortcategory"><button onclick="beauty()"><svg viewBox="0 0 24 24" fill="none" stroke="#1f1b4c" stroke-width="1.6"><rect x="8" y="8" width="8" height="12" rx="1.5"/><path d="M10 8V5a2 2 0 0 1 4 0v3"/></svg> 
+  Beauty</button></div>
+<div class="sortcategory"><button onclick="home()"><svg viewBox="0 0 24 24" fill="none" stroke="#1f1b4c" stroke-width="1.6"><path d="M4 11 12 4l8 7"/><path d="M6 10v9h12v-9"/></svg> 
+  Home</button></div>
+<div class="sortcategory"><button onclick="kitch()"><svg viewBox="0 0 24 24" fill="none" stroke="#1f1b4c" stroke-width="1.6"><path d="M6 3v7a3 3 0 0 0 6 0V3M9 10v11"/><path d="M17 3v18M14 8h6"/></svg>
+  Kitchen</button></div></div>
+</section>
+<div class="toolbar">
+    <h2 id="sectionTitle">Deals of the day</h2>
+    <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
+      <div class="pill-row" id="filterBar"></div>
+       <button class="sort-select" onclick="All()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
+  <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z"/>
+</svg></button>
+        <button class="sort-select" onclick="low()">Price: Low to High</button>
+        <button class="sort-select" onclick="high()">Price: High to Low</button>
+         <button class="sort-select" onclick="dis()">Sort: Highest Discount</button>
+    </div>
+  </div>
+<div id="productGrid"><div class="card" data-price="799" data-discount="20" data-category="electronics">
+    <span class="discount-badge">20% OFF</span>
+    <img src="image/a.jpeg">
+    <div class="category-tag">electronics</div>
+    <h3>Wireless Earbuds</h3>
+    <span class="price-now">₹799</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="699" data-discount="15" data-category="electronics">
+    <span class="discount-badge">15% OFF</span>
+    <img src="image/b.jpeg">
+    <div class="category-tag">electronics</div>
+    <h3>Bluetooth Speaker</h3>
+    <span class="price-now">₹699</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="299" data-discount="25" data-category="electronics">
+    <span class="discount-badge">25% OFF</span>
+    <img src="image/c.jpeg">
+    <div class="category-tag">electronics</div>
+    <h3>LED Smart Bulb</h3>
+    <span class="price-now">₹299</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="899" data-discount="10" data-category="electronics">
+    <span class="discount-badge">10% OFF</span>
+    <img src="image/u.jpeg">
+    <div class="category-tag">electronics</div>
+    <h3>Power Bank 10000mAh</h3>
+    <span class="price-now">₹899</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+  <div class="card" data-price="1299" data-discount="18" data-category="electronics">
+    <span class="discount-badge">18% OFF</span>
+    <img src="image/e1.jpeg">
+    <div class="category-tag">electronics</div>
+    <h3>Smart Watch</h3>
+    <span class="price-now">₹1299</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="549" data-discount="12" data-category="electronics">
+    <span class="discount-badge">12% OFF</span>
+    <img src="image/e2.jpeg">
+    <div class="category-tag">electronics</div>
+    <h3>USB-C Charging Cable, 2m</h3>
+    <span class="price-now">₹549</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="1799" data-discount="22" data-category="electronics">
+    <span class="discount-badge">22% OFF</span>
+    <img src="image/e3.jpeg">
+    <div class="category-tag">electronics</div>
+    <h3>Wired Headphones</h3>
+    <span class="price-now">₹1799</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="399" data-discount="8" data-category="electronics">
+    <span class="discount-badge">8% OFF</span>
+    <img src="image/e4.jpeg">
+    <div class="category-tag">electronics</div>
+    <h3>Phone Stand</h3>
+    <span class="price-now">₹399</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+  
+  <div class="card" data-price="799" data-discount="28" data-category="fashion">
+    <span class="discount-badge">28% OFF</span>
+    <img src="image/f1.jpeg">
+    <div class="category-tag">fashion</div>
+    <h3>Formal Blazer</h3>
+    <span class="price-now">₹799</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="299" data-discount="14" data-category="fashion">
+    <span class="discount-badge">14% OFF</span>
+    <img src="image/f2.jpeg">
+    <div class="category-tag">fashion</div>
+    <h3>Cotton Socks, Pack of 5</h3>
+    <span class="price-now">₹299</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="649" data-discount="20" data-category="fashion">
+    <span class="discount-badge">20% OFF</span>
+    <img src="image/f3.jpeg">
+    <div class="category-tag">fashion</div>
+    <h3>Summer Dress</h3>
+    <span class="price-now">₹649</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="199" data-discount="10" data-category="fashion">
+    <span class="discount-badge">10% OFF</span>
+    <img src="image/f4.jpeg">
+    <div class="category-tag">fashion</div>
+    <h3>Leather Belt</h3>
+    <span class="price-now">₹199</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+  <div class="card" data-price="449" data-discount="30" data-category="fashion">
+    <span class="discount-badge">30% OFF</span>
+    <img src="image/d.jpeg">
+    <div class="category-tag">fashion</div>
+    <h3>Printed Kurta</h3>
+    <span class="price-now">₹449</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="399" data-discount="20" data-category="fashion">
+    <span class="discount-badge">20% OFF</span>
+    <img src="image/e.jpeg">
+    <div class="category-tag">fashion</div>
+    <h3>Casual Shirt</h3>
+    <span class="price-now">₹399</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="899" data-discount="15" data-category="fashion">
+    <span class="discount-badge">15% OFF</span>
+    <img src="image/f.jpeg">
+    <div class="category-tag">fashion</div>
+    <h3>Denim Jeans</h3>
+    <span class="price-now">₹899</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="249" data-discount="10" data-category="fashion">
+    <span class="discount-badge">10% OFF</span>
+    <img src="image/g.jpeg">
+    <div class="category-tag">fashion</div>
+    <h3>Cotton T-Shirt</h3>
+    <span class="price-now">₹249</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+  <div class="card" data-price="299" data-discount="18" data-category="beauty">
+    <span class="discount-badge">18% OFF</span>
+    <img src="image/b1.jpeg">
+    <div class="category-tag">beauty</div>
+    <h3>Face Moisturizer</h3>
+    <span class="price-now">₹299</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="399" data-discount="25" data-category="beauty">
+    <span class="discount-badge">25% OFF</span>
+    <img src="image/b2.jpeg">
+    <div class="category-tag">beauty</div>
+    <h3>Shampoo & Conditioner Set</h3>
+    <span class="price-now">₹399</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="249" data-discount="12" data-category="beauty">
+    <span class="discount-badge">12% OFF</span>
+    <img src="image/b3.jpeg">
+    <div class="category-tag">beauty</div>
+    <h3>Nail Polish Set</h3>
+    <span class="price-now">₹249</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="549" data-discount="20" data-category="beauty">
+    <span class="discount-badge">20% OFF</span>
+    <img src="image/b4.jpeg">
+    <div class="category-tag">beauty</div>
+    <h3>Skincare Combo Kit</h3>
+    <span class="price-now">₹549</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="349" data-discount="25" data-category="beauty">
+    <span class="discount-badge">25% OFF</span>
+    <img src="image/h.jpeg">
+    <div class="category-tag">beauty</div>
+    <h3>Matte Lipstick</h3>
+    <span class="price-now">₹349</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="199" data-discount="10" data-category="beauty">
+    <span class="discount-badge">10% OFF</span>
+    <img src="image/i.jpeg">
+    <div class="category-tag">beauty</div>
+    <h3>Face Wash</h3>
+    <span class="price-now">₹199</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="449" data-discount="20" data-category="beauty">
+    <span class="discount-badge">20% OFF</span>
+    <img src="image/j.jpeg">
+    <div class="category-tag">beauty</div>
+    <h3>Hair Serum</h3>
+    <span class="price-now">₹449</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="999" data-discount="30" data-category="beauty">
+    <span class="discount-badge">30% OFF</span>
+    <img src="image/k.jpeg">
+    <div class="category-tag">beauty</div>
+    <h3>Perfume 100ml</h3>
+    <span class="price-now">₹999</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+  <div class="card" data-price="899" data-discount="22" data-category="home">
+    <span class="discount-badge">22% OFF</span>
+    <img src="image/h1.jpeg">
+    <div class="category-tag">home</div>
+    <h3>Cushion Cover Set</h3>
+    <span class="price-now">₹899</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="1299" data-discount="15" data-category="home">
+    <span class="discount-badge">15% OFF</span>
+    <img src="image/h2.jpeg">
+    <div class="category-tag">home</div>
+    <h3>Study Table Organizer</h3>
+    <span class="price-now">₹1299</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="449" data-discount="10" data-category="home">
+    <span class="discount-badge">10% OFF</span>
+    <img src="image/h3.jpeg">
+    <div class="category-tag">home</div>
+    <h3>Door Mat</h3>
+    <span class="price-now">₹449</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="699" data-discount="18" data-category="home">
+    <span class="discount-badge">18% OFF</span>
+    <img src="image/h4.jpeg">
+    <div class="category-tag">home</div>
+    <h3>Wall Shelf Set</h3>
+    <span class="price-now">₹699</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="549" data-discount="20" data-category="home">
+    <span class="discount-badge">20% OFF</span>
+    <img src="image/l.jpeg">
+    <div class="category-tag">home</div>
+    <h3>Cotton Bedsheet</h3>
+    <span class="price-now">₹549</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="449" data-discount="15" data-category="home">
+    <span class="discount-badge">15% OFF</span>
+    <img src="image/m.jpeg">
+    <div class="category-tag">home</div>
+    <h3>Table Lamp</h3>
+    <span class="price-now">₹449</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="349" data-discount="10" data-category="home">
+    <span class="discount-badge">10% OFF</span>
+    <img src="image/n.jpeg">
+    <div class="category-tag">home</div>
+    <h3>Wall Clock</h3>
+    <span class="price-now">₹349</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="699" data-discount="25" data-category="home">
+    <span class="discount-badge">25% OFF</span>
+    <img src="image/p.jpeg">
+    <div class="category-tag">home</div>
+    <h3>Curtain Set</h3>
+    <span class="price-now">₹699</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+  <div class="card" data-price="349" data-discount="15" data-category="kitchen">
+    <span class="discount-badge">15% OFF</span>
+    <img src="image/k1.jpeg">
+    <div class="category-tag">kitchen</div>
+    <h3>Mixing Bowl Set</h3>
+    <span class="price-now">₹349</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="999" data-discount="20" data-category="kitchen">
+    <span class="discount-badge">20% OFF</span>
+    <img src="image/k2.jpeg">
+    <div class="category-tag">kitchen</div>
+    <h3>Mixer Grinder</h3>
+    <span class="price-now">₹999</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="249" data-discount="12" data-category="kitchen">
+    <span class="discount-badge">12% OFF</span>
+    <img src="image/k3.jpeg">
+    <div class="category-tag">kitchen</div>
+    <h3>Chopping Board</h3>
+    <span class="price-now">₹249</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="149" data-discount="8" data-category="kitchen">
+    <span class="discount-badge">8% OFF</span>
+    <img src="image/k4.jpeg">
+    <div class="category-tag">kitchen</div>
+    <h3>Spice Rack</h3>
+    <span class="price-now">₹149</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+
+ 
+  <div class="card" data-price="599" data-discount="20" data-category="kitchen">
+    <span class="discount-badge">20% OFF</span>
+    <img src="image/q.jpeg">
+    <div class="category-tag">kitchen</div>
+    <h3>Non-stick Pan</h3>
+    <span class="price-now">₹599</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="249" data-discount="10" data-category="kitchen">
+    <span class="discount-badge">10% OFF</span>
+    <img src="image/r.jpeg">
+    <div class="category-tag">kitchen</div>
+    <h3>Steel Water Bottle</h3>
+    <span class="price-now">₹249</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="799" data-discount="25" data-category="kitchen">
+    <span class="discount-badge">25% OFF</span>
+    <img src="image/s.jpeg">
+    <div class="category-tag">kitchen</div>
+    <h3>Electric Kettle</h3>
+    <span class="price-now">₹799</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+ 
+  <div class="card" data-price="449" data-discount="15" data-category="kitchen">
+    <span class="discount-badge">15% OFF</span>
+    <img src="image/t.jpeg">
+    <div class="category-tag">kitchen</div>
+    <h3>Knife Set</h3>
+    <span class="price-now">₹449</span>
+    <button class="add-btn">Add to cart</button>
+  </div>
+</div>
+<section class="our">
+  <div class="our-in">
+    <div class="our-ser">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#1b9e6b" stroke-width="1.6"><path d="M3 12l6 6L21 6"/></svg>
+      <strong>7-day returns</strong><span>No questions asked</span>
+    </div>
+    <div class="our-ser">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#1b9e6b" stroke-width="1.6"><rect x="3" y="7" width="14" height="11" rx="1.5"/><path d="M17 10h3l1 3v5h-4"/><circle cx="7.5" cy="18.5" r="1.5"/><circle cx="17.5" cy="18.5" r="1.5"/></svg>
+      <strong>Free delivery</strong><span>On orders over ₹499</span>
+    </div>
+    <div class="our-ser">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#1b9e6b" stroke-width="1.6"><rect x="4" y="9" width="16" height="10" rx="2"/><path d="M4 12h16"/></svg>
+      <strong>Cash on delivery</strong><span>Pay when it arrives</span>
+    </div>
+    <div class="our-ser">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#1b9e6b" stroke-width="1.6"><path d="M12 21s-7-4.5-9-9c-1.4-3.3.5-6.5 3.7-6.9C8.6 4.8 10.5 5.8 12 7.4c1.5-1.6 3.4-2.6 5.3-2.3 3.2.4 5.1 3.6 3.7 6.9-2 4.5-9 9-9 9Z"/></svg>
+      <strong>Trusted by shoppers</strong><span>4.3★ average rating</span>
+    </div>
+  </div>
+</section>
+<footer>
+  DHARSH @ 2026
+</footer>
+</div>
+<script src="js/dharsh.js"></script>
+</body>
+</html>
